@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +22,7 @@ public class VirtualAssistantApplication {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "index"; // Ensure you have index.html in src/main/resources/templates
     }
 
     @PostMapping("/ask")
@@ -32,7 +31,7 @@ public class VirtualAssistantApplication {
                               Model model) {
         if (file.isEmpty()) {
             model.addAttribute("answer", "Please upload a PDF file.");
-            return "result";
+            return "result"; // Ensure you have result.html in src/main/resources/templates
         }
 
         try {
@@ -55,8 +54,7 @@ public class VirtualAssistantApplication {
     }
 
     private String findAnswer(String text, String question) {
-        // Add your logic here for answering the question based on the text
-        // This is a more sophisticated logic using regex patterns
+        // Basic search logic using regex patterns
         Pattern pattern = Pattern.compile("(?i)\\b" + Pattern.quote(question) + "\\b");
         Matcher matcher = pattern.matcher(text);
 
